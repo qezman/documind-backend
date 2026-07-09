@@ -1,6 +1,6 @@
-import fp from 'fastify-plugin';
-import fastifyJwt from '@fastify/jwt';
-import { env } from '../config/env.js';
+import fp from "fastify-plugin";
+import fastifyJwt from "@fastify/jwt";
+import { env } from "../config/env.js";
 
 export default fp(async function (fastify, opts) {
   fastify.register(fastifyJwt, {
@@ -8,7 +8,7 @@ export default fp(async function (fastify, opts) {
   });
 });
 
-declare module '@fastify/jwt' {
+declare module "@fastify/jwt" {
   interface FastifyJWT {
     payload: { id: string; name: string; email: string };
     user: { id: string; name: string; email: string };

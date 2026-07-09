@@ -1,13 +1,13 @@
 export interface CreateChunkInput {
   documentId: string;
-  content:    string;
+  content: string;
   chunkIndex: number;
   tokenCount: number;
-  embedding:  number[];
+  embedding: number[];
 }
 
 export interface RetrievedChunk {
   chunkIndex: number;
-  content:    string;
+  content: string;
   similarity: number;
 }

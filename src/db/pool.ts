@@ -1,5 +1,5 @@
-import pg from 'pg';
-import { env } from '../config/env.js';
+import pg from "pg";
+import { env } from "../config/env.js";
 
 // Create a singleton pool instance
 export const pool = new pg.Pool({
@@ -9,6 +9,6 @@ export const pool = new pg.Pool({
   connectionTimeoutMillis: 2000,
 });
 
-pool.on('error', (err) => {
-  console.error('Unexpected error on idle client', err);
+pool.on("error", (err) => {
+  console.error("Unexpected error on idle client", err);
 });

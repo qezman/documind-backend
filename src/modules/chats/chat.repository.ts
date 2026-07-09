@@ -1,14 +1,14 @@
-import { pool } from '../../db/pool.js';
-import type { Chat, InsertChatInput } from './chat.types.js';
+import { pool } from "../../db/pool.js";
+import type { Chat, InsertChatInput } from "./chat.types.js";
 
 const mapRowToChat = (row: any): Chat => ({
-  id:         row.id,
+  id: row.id,
   documentId: row.document_id,
-  userId:     row.user_id,
-  question:   row.question,
-  answer:     row.answer,
+  userId: row.user_id,
+  question: row.question,
+  answer: row.answer,
   chunksUsed: row.chunks_used ?? [],
-  createdAt:  row.created_at.toISOString(),
+  createdAt: row.created_at.toISOString(),
 });
 
 export const insertChat = async (input: InsertChatInput): Promise<string> => {
@@ -22,20 +22,20 @@ export const insertChat = async (input: InsertChatInput): Promise<string> => {
       input.question,
       input.answer,
       JSON.stringify(input.chunksUsed),
-    ]
+    ],
   );
   return rows[0].id;
 };
 
 export const getChatHistory = async (
   userId: string,
-  documentId: string
+  documentId: string,
 ): Promise<Chat[]> => {
   const { rows } = await pool.query(
     `SELECT * FROM chats
      WHERE user_id = $1 AND document_id = $2
      ORDER BY created_at ASC`,
-    [userId, documentId]
+    [userId, documentId],
   );
   return rows.map(mapRowToChat);
 };

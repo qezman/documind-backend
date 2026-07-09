@@ -4,7 +4,7 @@ export interface PresignInput {
 }
 
 export interface PresignResponse {
-  uploadUrl:  string;
-  key:        string;
+  uploadUrl: string;
+  key: string;
   documentId: string;
 }
