@@ -1,6 +1,11 @@
-import { S3Client, PutObjectCommand, GetObjectCommand, DeleteObjectCommand } from '@aws-sdk/client-s3';
-import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
-import { env } from '../config/env.js';
+import {
+  S3Client,
+  PutObjectCommand,
+  GetObjectCommand,
+  DeleteObjectCommand,
+} from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import { env } from "../config/env.js";
 
 const s3Client = new S3Client({
   region: env.AWS_REGION,
@@ -8,7 +13,7 @@ const s3Client = new S3Client({
 
 export const getUploadPresignedUrl = async (
   key: string,
-  mimeType: string
+  mimeType: string,
 ): Promise<string> => {
   const command = new PutObjectCommand({
     Bucket: env.AWS_S3_BUCKET_NAME,
@@ -26,7 +31,7 @@ export const getObjectFromS3 = async (key: string): Promise<Buffer> => {
   });
   const response = await s3Client.send(command);
   if (!response.Body) {
-    throw new Error('S3 response body is empty');
+    throw new Error("S3 response body is empty");
   }
   const byteArray = await response.Body.transformToByteArray();
   return Buffer.from(byteArray);
