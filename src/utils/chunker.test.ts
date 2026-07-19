@@ -1,0 +1,27 @@
+import { describe, it, expect, vi } from 'vitest';
+import { chunkText } from './chunker.js';
+
+// Mock the env configuration so we don't need real environment variables for the test
+vi.mock('../config/env.js', () => ({
+  env: {
+    CHUNK_SIZE_TOKENS: 50,
+    CHUNK_OVERLAP_TOKENS: 10,
+  },
+}));
+
+describe('chunkText', () => {
+  it('should return a single chunk for short text', () => {
+    const text = 'This is a short text that easily fits within the token limit.';
+    const chunks = chunkText(text);
+
+    expect(chunks).toHaveLength(1);
+    expect(chunks[0].content).toBe(text);
+    expect(chunks[0].chunkIndex).toBe(0);
+    expect(chunks[0].tokenCount).toBeGreaterThan(0);
+  });
+
+  it('should handle empty text gracefully', () => {
+    const chunks = chunkText('');
+    expect(chunks).toHaveLength(0);
+  });
+});

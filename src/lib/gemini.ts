@@ -5,7 +5,6 @@ const genAI = new GoogleGenerativeAI(env.GEMINI_API_KEY);
 const embedModel = genAI.getGenerativeModel({ model: "gemini-embedding-001" });
 const generateModel = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-// Embed a document chunk for storage
 export const embedChunk = async (text: string): Promise<number[]> => {
   const result = await embedModel.embedContent({
     content: { parts: [{ text }], role: "user" },
@@ -14,7 +13,6 @@ export const embedChunk = async (text: string): Promise<number[]> => {
   return result.embedding.values;
 };
 
-// Embed a user's question for retrieval
 export const embedQuery = async (question: string): Promise<number[]> => {
   const result = await embedModel.embedContent({
     content: { parts: [{ text: question }], role: "user" },
@@ -23,8 +21,6 @@ export const embedQuery = async (question: string): Promise<number[]> => {
   return result.embedding.values;
 };
 
-// Generate a grounded answer from context chunks
-// Returns an async generator for streaming
 export const generateAnswer = async function* (
   question: string,
   contextChunks: string[],

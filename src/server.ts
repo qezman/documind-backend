@@ -15,12 +15,12 @@ async function start() {
   await fastify.register(corsPlugin);
   await fastify.register(jwtPlugin);
 
-  fastify.get("/health", async () => ({ status: "ok" }));
+  fastify.get("/health", async (req, reply) => {
+    return reply.code(200).send({ status: "ok" });
+  });
 
-  // Auth routes (no JWT required)
   fastify.register(authRoutes, { prefix: "/auth" });
 
-  // Protected routes
   fastify.register(documentRoutes, { prefix: "/documents" });
   fastify.register(chatRoutes, { prefix: "/documents" });
   fastify.register(uploadRoutes, { prefix: "/uploads" });
