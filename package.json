@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "tsc",
-    "start": "node dist/server.js"
+    "start": "node dist/server.js",
+    "test": "vitest run"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1065.0",
@@ -30,6 +31,7 @@
     "@types/pdf-parse": "^1.1.4",
     "@types/pg": "^8.11.10",
     "tsx": "^4.19.2",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.2",
+    "vitest": "^4.1.10"
   }
 }
