@@ -7,7 +7,6 @@ function getString(value: unknown): string {
 }
 
 export const authRoutes = async (app: FastifyInstance): Promise<void> => {
-  // Login
   app.post("/login", async (req, reply) => {
     const body = (req.body ?? {}) as Record<string, unknown>;
     const email = getString(body.email).toLowerCase();
@@ -42,7 +41,6 @@ export const authRoutes = async (app: FastifyInstance): Promise<void> => {
     return { token, user: { id: user.id, name: user.name, email: user.email } };
   });
 
-  // Register
   app.post("/register", async (req, reply) => {
     const body = (req.body ?? {}) as Record<string, unknown>;
     const name = getString(body.name);
@@ -55,7 +53,6 @@ export const authRoutes = async (app: FastifyInstance): Promise<void> => {
         .send({ message: "Name, email, and password are required" });
     }
 
-    // Check for existing user
     const existing = await pool.query(
       'SELECT id FROM "User" WHERE email = $1',
       [email],

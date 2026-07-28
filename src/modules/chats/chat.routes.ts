@@ -5,7 +5,6 @@ import { askDocument, getChatHistory } from "./chat.service.js";
 export const chatRoutes = async (app: FastifyInstance): Promise<void> => {
   app.addHook("preHandler", authenticate);
 
-  // Streams the answer back using server-sent events
   app.post("/:id/ask", async (req, reply) => {
     const { id } = req.params as { id: string };
     const { question } = req.body as { question: string };

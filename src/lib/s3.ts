@@ -20,7 +20,6 @@ export const getUploadPresignedUrl = async (
     Key: key,
     ContentType: mimeType,
   });
-  // Presigned URL expires in 15 minutes (900 seconds)
   return getSignedUrl(s3Client, command, { expiresIn: 900 });
 };
 

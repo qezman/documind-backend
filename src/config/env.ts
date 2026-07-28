@@ -1,7 +1,6 @@
 import dotenv from "dotenv";
 import path from "path";
 
-// Load .env file in development
 dotenv.config();
 
 const required = (key: string): string => {

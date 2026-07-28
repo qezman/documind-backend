@@ -27,7 +27,6 @@ export const chunkText = (text: string): Chunk[] => {
   for (const paragraph of paragraphs) {
     const paragraphTokens = approximateTokens(paragraph);
 
-    // If adding this paragraph exceeds the chunk limit, save current buffer and advance
     if (bufferTokens + paragraphTokens > CHUNK_SIZE_TOKENS && buffer) {
       chunks.push({
         content: buffer.trim(),
@@ -35,7 +34,7 @@ export const chunkText = (text: string): Chunk[] => {
         tokenCount: bufferTokens,
       });
 
-      // Carry overlap into the next chunk
+      // carry overlap words into the next chunk for context continuity
       const words = buffer.split(/\s+/);
       const overlapWords = words.slice(
         -Math.round(CHUNK_OVERLAP_TOKENS * 0.75),

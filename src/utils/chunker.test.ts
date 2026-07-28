@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import { chunkText } from './chunker.js';
 
-// Mock the env configuration so we don't need real environment variables for the test
+// stub env so tests don't need a real .env
 vi.mock('../config/env.js', () => ({
   env: {
     CHUNK_SIZE_TOKENS: 50,

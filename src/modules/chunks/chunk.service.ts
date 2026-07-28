@@ -29,7 +29,7 @@ export const processDocumentIntoChunks = async (
     const emb = await embedChunk(chunk.content);
     embeddings.push(emb);
     if (chunks.length > 50) {
-      await new Promise((r) => setTimeout(r, 50));
+      await new Promise((r) => setTimeout(r, 50)); // throttle to avoid Gemini rate limits
     }
   }
 

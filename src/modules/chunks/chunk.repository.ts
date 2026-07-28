@@ -6,7 +6,7 @@ export const insertChunks = async (
 ): Promise<void> => {
   if (chunks.length === 0) return;
 
-  // Batch insert for performance — one round trip for all chunks
+  // one round trip for all chunks
   const values = chunks
     .map((_, i) => {
       const base = i * 5;
