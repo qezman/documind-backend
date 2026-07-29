@@ -18,11 +18,10 @@ export const processDocumentIntoChunks = async (
   const buffer = await getObjectFromS3(s3Key);
   const rawText = await extractText(buffer, mimeType as SupportedMime);
 
-  if (!rawText.trim()) {
-    throw new AppError("Document appears to be empty or unreadable", 422);
-  }
-
   const chunks = chunkText(rawText);
+  if (chunks.length === 0) {
+    throw new AppError("Could not generate text chunks from document", 422);
+  }
 
   const embeddings: number[][] = [];
   for (const chunk of chunks) {

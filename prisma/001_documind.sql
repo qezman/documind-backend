@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS document_chunks (
   content       TEXT   NOT NULL,
   chunk_index   INT    NOT NULL,
   token_count   INT,
-  embedding     vector(768) NOT NULL
+  embedding     vector(3072) NOT NULL
 );
 
 -- Create HNSW index
