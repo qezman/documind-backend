@@ -25,10 +25,10 @@ CREATE TABLE IF NOT EXISTS document_chunks (
   embedding     vector(3072) NOT NULL
 );
 
--- Create HNSW index
-CREATE INDEX IF NOT EXISTS document_chunks_embedding_hnsw_idx ON document_chunks
-  USING hnsw (embedding vector_cosine_ops)
-  WITH (m = 16, ef_construction = 64);
+-- -- Create HNSW index
+-- CREATE INDEX IF NOT EXISTS document_chunks_embedding_hnsw_idx ON document_chunks
+--   USING hnsw (embedding vector_cosine_ops)
+--   WITH (m = 16, ef_construction = 64);
 
 -- Create chats table
 CREATE TABLE IF NOT EXISTS chats (
