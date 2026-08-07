@@ -30,7 +30,8 @@ async function start() {
       return reply.status(error.statusCode).send({ message: error.message });
     }
     fastify.log.error(error);
-    return reply.status(500).send({ message: "Internal Server Error" });
+    const msg = error instanceof Error ? error.message : "Internal Server Error";
+    return reply.status(500).send({ message: msg });
   });
 
   try {
