@@ -3,7 +3,7 @@ import { env } from "../config/env.js";
 
 const genAI = new GoogleGenerativeAI(env.GEMINI_API_KEY);
 const embedModel = genAI.getGenerativeModel({ model: "gemini-embedding-001" });
-const generateModel = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+const generateModel = genAI.getGenerativeModel({ model: "gemini-3.6-flash" });
 
 export const embedChunk = async (text: string): Promise<number[]> => {
   const result = await embedModel.embedContent({
